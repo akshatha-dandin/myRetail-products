@@ -1,5 +1,5 @@
 server.port: 8080
-service.contextPath: '/api/v1/products'
+service.contextPath: '/product-api/v1/products'
 
 spring.application.name: product
 
@@ -19,7 +19,7 @@ product:
       API_ERR_INVALID_PRICE: Please enter a valid price
       API_ERR_INVALID_PRODUCTID: Please enter a valid productId
   rest:
-    getProductsUrl: http://localhost:9080/api/v1/demo?key={key}&tcin={tcin}
+    getProductsUrl: https://redsky-uat.perf.target.com/redsky_aggregations/v1/redsky/case_study_v1?key={key}&tcin={tcin}
     headerName: token
     totalconnections: 10
     connectiontimeout: 3000
