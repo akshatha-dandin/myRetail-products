@@ -1,7 +1,9 @@
 package com.myRetail.product.service.impl;
 
+import com.myRetail.product.client.ProductClient;
 import com.myRetail.product.domain.Price;
 import com.myRetail.product.domain.Product;
+import com.myRetail.product.dto.*;
 import com.myRetail.product.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +24,9 @@ class ProductServiceImplTest {
     @Mock
     ProductRepository productRepository;
 
+    @Mock
+    ProductClient productClient;
+
     @InjectMocks
     ProductServiceImpl productService;
 
@@ -31,6 +36,11 @@ class ProductServiceImplTest {
         Price price = Price.builder()
                 .value(new BigDecimal("13.45")).currencyCode("USD").build();
         when(productRepository.getPrice(productId)).thenReturn(price);
+        ProductClientResponse productClientResponse = ProductClientResponse.builder().build();
+        productClientResponse.setData(ProductData.builder().product(ProductDetails.builder()
+                .item(ItemDetails.builder().product_description(ProductDescription.builder()
+                        .title("The Big Lebowski (Blu-ray) (Widescreen)").build()).build()).build()).build());
+        when(productClient.getProductDetails("13860429")).thenReturn(productClientResponse);
 
         Product product = productService.getProduct(productId);
         Product expectedProduct = Product.builder().price(price).id(productId)

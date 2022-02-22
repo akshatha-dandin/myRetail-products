@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -43,6 +44,14 @@ class ProductResourceTest {
                 .addPlaceholderValue("service.contextPath", "/api/v1/products")
                 .setControllerAdvice(new ProductControllerAdvice())
                 .build();
+        ReflectionTestUtils.setField(productResource, "invalidPriceErrorCode",
+                "API_ERR_INVALID_PRICE");
+        ReflectionTestUtils.setField(productResource, "invalidPriceErrorMessage",
+                "Please enter a valid price");
+        ReflectionTestUtils.setField(productResource, "invalidProductErrorCode",
+                "API_ERR_INVALID_PRODUCTID");
+        ReflectionTestUtils.setField(productResource, "invalidProductErrorMessage",
+                "Please enter a valid productId");
     }
 
     @Test

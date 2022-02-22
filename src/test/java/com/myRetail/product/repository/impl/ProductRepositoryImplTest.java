@@ -3,6 +3,7 @@ package com.myRetail.product.repository.impl;
 import com.myRetail.product.domain.Price;
 import com.myRetail.product.exceptions.BusinessException;
 import com.myRetail.product.model.PriceTable;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.query.Query;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -29,6 +31,13 @@ public class ProductRepositoryImplTest {
 
     @InjectMocks
     ProductRepositoryImpl productRepository;
+
+    @BeforeEach
+    void setUp() {
+        ReflectionTestUtils.setField(productRepository, "errorCode", "API_ERR_NOT_FOUND");
+        ReflectionTestUtils.setField(productRepository, "errorMessage",
+                "Sorry, requested product is not found");
+    }
 
     @Test
     public void shouldBeAbleToRetrievePrice() {

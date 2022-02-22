@@ -1,2 +1,15 @@
-package com.myRetail.product.dto;public class ItemDetails {
+package com.myRetail.product.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ItemDetails {
+    String tcin;
+    ProductDescription product_description;
 }
