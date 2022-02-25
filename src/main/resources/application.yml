@@ -24,3 +24,12 @@ product:
     totalconnections: 10
     connectiontimeout: 3000
     readtimeout: 3000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,info,env,beans
+    jmx:
+      exposure:
+        include: health
